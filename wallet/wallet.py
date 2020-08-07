@@ -67,7 +67,7 @@ def send_tx(account, to, amount, coin):
     if coin == ETH:
         w3 = Web3(Web3.HTTPProvider("http://127.0.0.1:8545"))
         w3.middleware_onion.inject(geth_poa_middleware, layer=0)
-        tx = create_raw_tx(coin, to, amount)
+        tx = create_raw_tx(account, to, amount, coin)
         signed_tx = account.sign_transaction(tx)
         result = w3.eth.sendRawTransaction(signed_tx.rawTransaction)
         print(result.hex())
